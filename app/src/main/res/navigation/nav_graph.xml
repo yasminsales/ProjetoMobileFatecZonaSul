@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_continente_list">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_ContinentList_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment

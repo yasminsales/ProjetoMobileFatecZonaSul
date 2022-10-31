@@ -26,10 +26,10 @@ public class DaoContinente extends DatabaseCreation {
 
     public Continente excluir(Continente conEnt) throws SQLException {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] params = { String.valueOf(conEnt.getId()) };
+        String[] params =  { String.valueOf(conEnt.getId()) };
 
         // all values are inserted into database
-        db.rawQuery("DELETE FROM Continente where id = ?", params);
+        db.execSQL("DELETE FROM continente where id = ?", params);
 
         return conEnt;
     }

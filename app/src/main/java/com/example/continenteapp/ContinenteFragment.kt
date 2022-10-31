@@ -58,10 +58,10 @@ class ContinenteFragment : Fragment() {
             val controller = ControllerContinente(this.context)
 
             val name = binding.nomeValue.text.toString()
-
             val area = binding.areaValue.text.toString()
 
             controller.inserir(Continente(name, area.toInt() ))
+            findNavController().navigate(R.id.action_ContinentFragment_to_FirstFragment)
         }
 
     }
