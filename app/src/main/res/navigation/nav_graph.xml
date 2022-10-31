@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.continenteapp.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/ContinenteListFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_ContinenteFragment"
+            app:destination="@id/ContinenteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ContinenteFragment"
+        android:name="com.example.continenteapp.ContinenteFragment"
+        android:label="Continente"
+        tools:layout="@layout/fragment_continente">
+
+        <action
+            android:id="@+id/action_ContinentFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ContinenteListFragment"
+        android:name="com.example.continenteapp.ContinenteListFragment"
+        android:label="Continente list fragment"
+        tools:layout="@layout/fragment_continente_list">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.continenteapp.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+</navigation>
