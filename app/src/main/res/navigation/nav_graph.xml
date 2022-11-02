@@ -36,7 +36,26 @@
         tools:layout="@layout/fragment_continente_list">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_ContinentList_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+
+        <action
+            android:id="@+id/action_ContinentList_to_EditFragment"
+            app:destination="@id/ContinenteEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ContinenteEditFragment"
+        android:name="com.example.continenteapp.ContinenteEditFragment"
+        android:label="Continente edit fragment"
+        tools:layout="@layout/fragment_continente_edit">
+
+        <argument
+            android:name="ContinenteId"
+            app:argType="integer"
+            android:defaultValue="0" />
+
+        <action
+            android:id="@+id/action_ContinentEdit_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
