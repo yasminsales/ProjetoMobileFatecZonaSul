@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
+import com.example.continenteapp.ARG_ContinenteId
 import com.example.continenteapp.ProjetoTerraControllers.ControllerContinente
 import com.example.continenteapp.ProjetoTerraModellBins.Continente
 import com.example.continenteapp.R
@@ -28,6 +30,15 @@ class ContinenteAdapter(context : Context, continentes : ArrayList<Continente>) 
                 val controller = ControllerContinente(this.context)
                 controller.excluir(continente)
                 findNavController(localView!!.root).navigate(R.id.action_ContinentList_to_FirstFragment)
+            }catch (e: Exception) {
+                throw e;
+            }
+        }
+
+        localView.buttonEdit.setOnClickListener {
+            try {
+                val bundle = bundleOf(ARG_ContinenteId to continente!!.id)
+                findNavController(localView!!.root).navigate(R.id.action_ContinentList_to_EditFragment, bundle)
             }catch (e: Exception) {
                 throw e;
             }

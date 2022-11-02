@@ -1,6 +1,5 @@
 package com.example.continenteapp
 
-import com.google.android.material.snackbar.Snackbar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,24 +9,24 @@ import androidx.navigation.fragment.findNavController
 import com.example.continenteapp.ProjetoTerraControllers.ControllerContinente
 import com.example.continenteapp.ProjetoTerraModellBins.Continente
 import com.example.continenteapp.databinding.FragmentContinenteBinding
-import com.example.continenteapp.databinding.FragmentFirstBinding
+import com.example.continenteapp.databinding.FragmentContinenteEditBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
+public const val ARG_ContinenteId = "ContinenteId"
 private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ContinenteFragment.newInstance] factory method to
+ * Use the [ContinenteEditFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ContinenteFragment : Fragment() {
+class ContinenteEditFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var continenteId: Int = 0
 
-    private var _binding: FragmentContinenteBinding? = null
+
+    private var _binding: FragmentContinenteEditBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -36,8 +35,7 @@ class ContinenteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            continenteId = it.getInt(ARG_ContinenteId)
         }
     }
 
@@ -46,21 +44,28 @@ class ContinenteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentContinenteBinding.inflate(inflater, container, false)
+        _binding = FragmentContinenteEditBinding.inflate(inflater, container, false)
+
         return _binding!!.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val controller = ControllerContinente(this.context)
+        val continenteModel = controller.buscar(Continente(continenteId))
+
+        binding.nomeValue.setText(continenteModel.nome)
+        binding.areaValue.setText(continenteModel.area.toString())
+
         binding.buttonSave.setOnClickListener {
-            val controller = ControllerContinente(this.context)
 
             val name = binding.nomeValue.text.toString()
             val area = binding.areaValue.text.toString()
 
-            controller.inserir(Continente(name, area.toInt() ))
-            findNavController().navigate(R.id.action_ContinentFragment_to_FirstFragment)
+            controller.alterar(Continente(continenteId, name, area.toInt()))
+            findNavController().navigate(R.id.action_ContinentEdit_to_FirstFragment)
         }
     }
 
@@ -71,15 +76,14 @@ class ContinenteFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Continente.
+         * @return A new instance of fragment ContinenteEditFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ContinenteFragment().apply {
+        fun newInstance(continenteId: Int) =
+            ContinenteEditFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_ContinenteId, continenteId)
                 }
             }
     }

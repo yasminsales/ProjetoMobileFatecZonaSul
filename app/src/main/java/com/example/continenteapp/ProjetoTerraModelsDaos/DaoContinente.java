@@ -35,17 +35,15 @@ public class DaoContinente extends DatabaseCreation {
     }
     
     public Continente buscar(Continente conEnt) throws SQLException {
-        String sql = "select * from continente WHERE id = ?";
+        String sql = "select id, nome, area from continente where id = ?";
         SQLiteDatabase db = this.getReadableDatabase();
 
         // seta os valores
+        String[] params = { String.valueOf(conEnt.getId()) };
         // executa
-        int id = conEnt.getId();
-        String[] params = { String.valueOf(id) };
         Cursor cursor = db.rawQuery(sql, params);
 
         Continente conSaida = null;
-        cursor.moveToFirst();
 
         while (cursor.moveToNext()) {
             // criando o objeto continente
@@ -86,14 +84,14 @@ public class DaoContinente extends DatabaseCreation {
      public Continente alterar(Continente conEnt) throws SQLException{
         String sql = "UPDATE continente SET nome = ?, area = ? WHERE id = ?";
 
-        // prepared statement para inserção
         // seta os valores
         String[] params = { conEnt.getNome(), String.valueOf(conEnt.getArea()), String.valueOf(conEnt.getId()) };
+
+        //executa
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery(sql, params);
+        db.execSQL(sql, params);
 
-        cursor.close();
         return conEnt;
     }
      
